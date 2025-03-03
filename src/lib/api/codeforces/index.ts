@@ -30,7 +30,6 @@ export const getCodeForcesProblemSet = async (tagsString?: string[]) => {
     +new Date() - +new Date(get(problemsUpdatedAt)) < 1000 * 60
   )
     return;
-  problemsUpdatedAt.set(new Date().toISOString());
   const { problems: iproblems, problemStats: iproblemstats } = await codeforces
     .get<{
       status: string;
@@ -56,6 +55,7 @@ export const getCodeForcesProblemSet = async (tagsString?: string[]) => {
   ]);
   problems.set(iproblems);
   problemStats.set(iproblemstats);
+  problemsUpdatedAt.set(new Date().toISOString());
   return problems;
 };
 
